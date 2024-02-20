@@ -17,3 +17,26 @@ This program should read the file system image and determine the consistency of 
 10. For each inode number that is referred to in a valid directory, it is actually marked in use. If not, print ERROR: inode referred to in directory but marked free.
 11. Reference counts (number of links) for regular files match the number of times file is referred to in directories (i.e., hard links work correctly). If not, print ERROR: bad reference count for file.
 12. No extra links allowed for directories (each directory only appears in one other directory). If not, print ERROR: directory appears more than once in file system.
+
+## Structure:  
+```bash
+prompt> fcheck file_system_image
+```
+
+The image file is a file that contains the file system image. If no image file is provided, the program will print the usage error shown below:  
+```bash
+prompt> fcheck
+```
+```bash
+Usage: fcheck <file_system_image>
+```  
+This output will be printed to standard error and exit with the error code of 1.  
+If the file system image does not exist, you should print *image not found*. to standard error and exit with the error code of 1.  
+If fcheck detects any one of the 12 errors above, it should print the specific error to standard error and exit with error code 1.  
+If fcheck detects none of the problems listed above, it should exit with return code of 0 and not print anything.  
+
+## Run:
+Make sure you compile your program as follows:
+```bash
+gcc fcheck.c -o fcheck -Wall -Werror -O -std=gnu99
+```
